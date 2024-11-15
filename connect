@@ -1,0 +1,16 @@
+#!/usr/bin/perl
+
+die "usage: $0 <devices as a csv> <orientation as a csv> \n" unless ($#ARGV + 1) == 2;
+
+my ($all_devices, $all_orientations) = @ARGV;
+my @devices = split ",", $all_devices;
+my @orientations = split ",", $all_orientations;
+
+die "amount of devices doesn't match the amount of orientations" unless $#devices == $#orientations;
+
+my $command = "xrandr";
+for ( my $i = 0; $i < ($#devices + 1); $i++ ) {  # C style
+	$command = $command . " --output @devices[$i] --mode 1920x1080 --rotate @orientations[$i]";
+}
+$command = $command . " 2>/dev/null";
+die "xrandr failed" unless system($command) == 0;
