@@ -1,0 +1,4 @@
+#!/usr/bin/perl
+
+die "usage: $0 <phrase>\n" unless ($#ARGV + 1) == 1;
+system("grep -rni @ARGV[0] --exclude-dir={.git,target,build} --color");
