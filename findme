@@ -1,0 +1,4 @@
+#!/usr/bin/perl
+
+die "usage: $0 f|d <filename>\n" unless ($#ARGV + 1) == 2;
+system("find -L . -type @ARGV[0] -name @ARGV[1]");
